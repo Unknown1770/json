@@ -1,4 +1,7 @@
 from flask import Flask, request
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
 
 '''
 from datetime import time
@@ -16,6 +19,12 @@ firebase_admin.initialize_app(cred, {
 })
 db = firestore.client()
 '''
+
+cred = credentials.Certificate('testing-bf5a4-firebase-adminsdk-k3wvf-9481825d20.json')
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://testing-bf5a4.firebaseio.com/'
+})
+db = firestore.client()
 
 app = Flask(__name__)
 
@@ -70,6 +79,10 @@ def profile_example():
     
     value = { 'Name':name, 'User_name':user_name, 'Addressal_name' : addressal_name, 'City' : city, 'Email' : email, 'Mobile' : mobile, 'Date_of_birth' : dob,
              'Birth_month' : dob_month,'Birth_year' : dob_year,'Gender' : gender}
+    
+    doc_ref = db.collection(u'Profile').document()
+    ldoc_id = docref.set(value)
+    
     data = '''
             Name: {}
             User_name: {}
@@ -80,9 +93,10 @@ def profile_example():
             Date_of_birth: {}
             Birth_month: {}
             Birth_year: {}
-            Gender: {}'''.format(name, user_name, addressal_name, city, email, mobile, dob, dob_month, dob_year, gender)
+            Gender: {}
+            Document_id: {}'''.format(name, user_name, addressal_name, city, email, mobile, dob, dob_month, dob_year, gender, ldoc_id)
 
-    return str(value)
+    return str(data)
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
