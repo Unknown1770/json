@@ -51,6 +51,7 @@ def profile_example():
     nationality = None
     dob_month = None
     dob_year = None
+    ldoc_id = None
 
     if request_data:
         if 'city' in request_data:
@@ -85,20 +86,27 @@ def profile_example():
     
     newval = { 'Name':name, 'User_name':user_name, 'Addressal_name' : addressal_name, 'City' : city, 'Email' : email, 'Mobile' : mobile, 'Date_of_birth' : dob,
                'Birth_month' : dob_month,'Birth_year' : dob_year,'Gender' : gender, 'Document_id':ldoc_id}
-    data = '''
-            Name: {}
-            User_name: {}
-            Addressal_name: {}
-            City: {}
-            Email: {}
-            Mobile: {}
-            Date_of_birth: {}
-            Birth_month: {}
-            Birth_year: {}
-            Gender: {}
-            Document_id: {}'''.format(name, user_name, addressal_name, city, email, mobile, dob, dob_month, dob_year, gender, ldoc_id)
-
-    return str(newval)
+    
+    if ldocid != None:
+        return str(newval)
+    else:
+        return str(value)
+    
+    
+    #data = '''
+     #       Name: {}
+      #      User_name: {}
+       #     Addressal_name: {}
+        #    City: {}
+         #   Email: {}
+          #  Mobile: {}
+           # Date_of_birth: {}
+            #Birth_month: {}
+            #Birth_year: {}
+           # Gender: {}
+            #Document_id: {}'''.format(name, user_name, addressal_name, city, email, mobile, dob, dob_month, dob_year, gender, ldoc_id)
+   
+    
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
