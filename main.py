@@ -81,8 +81,11 @@ def profile_example():
     value = { 'Name':name, 'User_name':user_name, 'Addressal_name' : addressal_name, 'City' : city, 'Email' : email, 'Mobile' : mobile, 'Date_of_birth' : dob,
              'Birth_month' : dob_month,'Birth_year' : dob_year,'Gender' : gender}
     
-    doc_ref = db.collection(u'NewProfile').document()
-    ldoc_id = docref.set(value)
+    try:
+        doc_ref = db.collection(u'NewProfile').document()
+        ldoc_id = docref.set(value)
+    except error as err:
+        return str(err)
     
     newval = { 'Name':name, 'User_name':user_name, 'Addressal_name' : addressal_name, 'City' : city, 'Email' : email, 'Mobile' : mobile, 'Date_of_birth' : dob,
                'Birth_month' : dob_month,'Birth_year' : dob_year,'Gender' : gender, 'Document_id':ldoc_id}
