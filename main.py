@@ -80,9 +80,11 @@ def profile_example():
     value = { 'Name':name, 'User_name':user_name, 'Addressal_name' : addressal_name, 'City' : city, 'Email' : email, 'Mobile' : mobile, 'Date_of_birth' : dob,
              'Birth_month' : dob_month,'Birth_year' : dob_year,'Gender' : gender}
     
-    doc_ref = db.collection(u'Profile').document()
+    doc_ref = db.collection(u'NewProfile').document()
     ldoc_id = docref.set(value)
     
+    newval = { 'Name':name, 'User_name':user_name, 'Addressal_name' : addressal_name, 'City' : city, 'Email' : email, 'Mobile' : mobile, 'Date_of_birth' : dob,
+               'Birth_month' : dob_month,'Birth_year' : dob_year,'Gender' : gender, 'Document_id':ldoc_id}
     data = '''
             Name: {}
             User_name: {}
@@ -96,7 +98,7 @@ def profile_example():
             Gender: {}
             Document_id: {}'''.format(name, user_name, addressal_name, city, email, mobile, dob, dob_month, dob_year, gender, ldoc_id)
 
-    return str(data)
+    return str(newval)
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
